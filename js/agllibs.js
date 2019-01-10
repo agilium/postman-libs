@@ -54,7 +54,7 @@ var testDataOk = function(id) {
 		pm.response.to.have.jsonBody("data")
 	});
 	
-	pm.test("Cookie SSO Removed OK", ()=>{
+	pm.test("Get Cookie SSO OK", ()=>{
 		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
 	});
 	
