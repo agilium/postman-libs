@@ -22,7 +22,7 @@ var testResponseOk= function() {
 
 /**
  * @testDataOk
- Response Must have jsonBody.data.id
+ * Response Must have jsonBody.data.id
  * @param id
  */
 
@@ -91,6 +91,26 @@ var  testLogoutOk = function() {
 	pm.test("Cookie SSO Removed OK", ()=>{
 		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.false
 	});
+
+
 	
+}
+
+var TestLoginUserSociety  = function() {
+	pm.test("Response is OK", ()=>{
+		pm.response.to.be.success
+		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
+		pm.response.to.have.jsonBody()
+	})
+		
+	
+	pm.test("Payload is OK", ()=> {
+		pm.response.to.have.jsonBody("success", true)
+		pm.response.to.have.jsonBody("data")
+	})
+
+	pm.test('User have correct Society ', function(siteId){
+		pm.response.to.have.jsonBody("data.profile.siteId", siteId)
+	 });
 }
 	
