@@ -96,21 +96,36 @@ var  testLogoutOk = function() {
 	
 }
 
-var TestLoginUserSociety  = function() {
-	pm.test("Response is OK", ()=>{
+var TGedLogin = function() {
+	pm.test("Response is OK", function() {
 		pm.response.to.be.success
+		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
 		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
 		pm.response.to.have.jsonBody()
 	})
-		
-	
-	pm.test("Payload is OK", ()=> {
+
+	pm.test("Payload is OK", function() {
 		pm.response.to.have.jsonBody("success", true)
 		pm.response.to.have.jsonBody("data")
-	})
-
-	pm.test('User have correct Society ', function(siteId){
-		pm.response.to.have.jsonBody("data.profile.siteId", siteId)
-	 });
+	});	
+	
+	pm.test('Data is OK', function(label, role){
+		jsonBody = pm.response.json();
+			pm.expect(jsonBody.data.account.profile.societe.label).to.equal(label)
+			pm.expect(jsonBody.data.account.profile.societe.rolesDimensions).to.equal(role)
+	});
 }
+
+var TGetReferencial = function(referential) {
+	pm.test("Referential is OK", function (){
+		jsonBody = pm.response.json();
+		pm.expect(jsonBody.data[0].id).to.equal(referential)
+	})
+}
+
+
+
+
+
+
 	
