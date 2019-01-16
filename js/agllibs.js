@@ -29,7 +29,6 @@ var testResponseOk= function() {
 var testDataOk = function(id) {
 	pm.test('Data is OK', function(){
 	   pm.response.to.have.jsonBody("data[2].id", id)
-
 	});
 }
 
@@ -168,43 +167,11 @@ var  testLogoutOk = function() {
 	pm.test("Cookie SSO Removed OK", ()=>{
 		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.false
 	});
+}
 	
-	}
 
-	var TGedLogin = function() {
-		pm.test("Response is OK", function() {
-			pm.response.to.be.success
-			pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
-			pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
-			pm.response.to.have.jsonBody()
-		})
 	
-		pm.test("Payload is OK", function() {
-			pm.response.to.have.jsonBody("success", true)
-			pm.response.to.have.jsonBody("data")
-			pm.response
-		});	
-		
-		pm.test('Data is OK', function(){
-			var jsonBody = pm.response.json();
-				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU");
-				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions[0].id).to.equal("absged.depositaireAvecValidation");
-		});
-	}
 	
-	var TGetReferencialLots = function() {
-		pm.test("Lot is OK", function (){
-			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[0].id).to.equal("FAC");
-		})
-	}
-
-	var TGetReferencialProjectPhase = function() {
-		pm.test("Phase is OK", function (){
-			jsonBody = pm.response.json();
-			
-		})
-	}
 	
 	
 	
