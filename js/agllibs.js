@@ -202,6 +202,7 @@ var  testLogoutOk = function() {
 	var TGetReferencialProjectPhase = function() {
 		pm.test("Phase is OK", function (){
 			jsonBody = pm.response.json();
+			pm.expect(jsonBody.data[2].id).to.equal("EXE");
 			
 		})
 	}
