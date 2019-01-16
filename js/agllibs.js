@@ -96,32 +96,115 @@ var  testLogoutOk = function() {
 	
 }
 
-var TGedLogin = function() {
+/** Response should be a JSON
+ * Response must have jsonBody.Success
+ * Response must have a jsonBody and properties data
+ * @param none
+ */
+
+var testResponseOk= function() {
+
 	pm.test("Response is OK", function() {
 		pm.response.to.be.success
 		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
 		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
 		pm.response.to.have.jsonBody()
 	})
-
+	
 	pm.test("Payload is OK", function() {
 		pm.response.to.have.jsonBody("success", true)
 		pm.response.to.have.jsonBody("data")
-	});	
+	});
 	
-	pm.test('Data is OK', function(label, role){
-		jsonBody = pm.response.json();
-			pm.expect(jsonBody.data.account.profile.societe.label).to.equal(label)
-			pm.expect(jsonBody.data.account.profile.societe.rolesDimensions).to.equal(role)
+}  
+
+/**
+ Response Must have jsonBody.data.id
+ * @param id
+ */
+
+var testDataOk = function(id) {
+	pm.test('Data is OK', function(){
+	   pm.response.to.have.jsonBody("data.id", id)
+	   console.log(jsonBody.data.id)
 	});
 }
 
-var TGetReferencial = function(referential) {
-	pm.test("Referential is OK", function (){
-		jsonBody = pm.response.json();
-		pm.expect(jsonBody.data[0].id).to.equal(referential)
+ /**
+ * @param none
+ */
+
+ var testloginOk = function() {
+	pm.test("Response is OK", ()=>{
+		pm.response.to.be.success
+		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
+		pm.response.to.have.jsonBody()
 	})
+	
+	pm.test("Payload is OK", ()=> {
+		pm.response.to.have.jsonBody("success", true)
+		pm.response.to.have.jsonBody("data")
+	});
+	
+	pm.test("Cookie SSO Removed OK", ()=>{
+		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
+	});
+	
 }
+	
+var  testLogoutOk = function() {
+
+	pm.test("Response is OK", ()=>{
+		pm.response.to.be.success
+		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
+		pm.response.to.have.jsonBody()
+	})
+	
+	pm.test("Payload is OK", ()=> {
+		pm.response.to.have.jsonBody("success", true)
+		pm.response.to.have.jsonBody("data")
+	});
+	
+	pm.test("Cookie SSO Removed OK", ()=>{
+		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.false
+	});
+	
+	}
+
+	var TGedLogin = function() {
+		pm.test("Response is OK", function() {
+			pm.response.to.be.success
+			pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
+			pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
+			pm.response.to.have.jsonBody()
+		})
+	
+		pm.test("Payload is OK", function() {
+			pm.response.to.have.jsonBody("success", true)
+			pm.response.to.have.jsonBody("data")
+			pm.response
+		});	
+		
+		pm.test('Data is OK', function(){
+			jsonBody = pm.response.json();
+				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU")
+				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions.id).to.equal("absged.depositaireAvecValidation")
+		});
+	}
+	
+	var TGetReferencial = function() {
+		pm.test("Referential is OK", function (){
+			jsonBody = pm.response.json();
+			pm.expect(jsonBody.data[0].id).to.equal("FAC")
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
 
 
 
