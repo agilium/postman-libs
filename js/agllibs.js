@@ -275,6 +275,26 @@ var  testLogoutOk = function() {
 		})
 	}
 	
+	var TGetReferencialLevel = function() {
+		pm.test("Response is OK", function() {
+			pm.response.to.be.success
+			pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
+			pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
+			pm.response.to.have.jsonBody()
+		})
+	
+		pm.test("Payload is OK", function() {
+			pm.response.to.have.jsonBody("success", true)
+			pm.response.to.have.jsonBody("data")
+			pm.response
+		});	
+		
+		
+		pm.test("Level is OK", function (){
+			jsonBody = pm.response.json();
+			pm.expect(jsonBody.data[8].id).to.equal("TN");
+		})
+	}
 	
 	
 	
