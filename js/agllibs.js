@@ -189,7 +189,7 @@ var  testLogoutOk = function() {
 			var jsonBody = pm.response.json();
 				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU")
 				console.log(jsonBody.data.account.profile.societe.label);
-				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions.id).to.equal("absged.depositaireAvecValidation")
+				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions[0].id).to.equal("absged.depositaireAvecValidation")
 				console.log(jsonBody.data.account.profile.societe.rolesDimensions.id);
 		});
 	}
