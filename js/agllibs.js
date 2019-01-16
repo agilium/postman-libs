@@ -292,7 +292,7 @@ var  testLogoutOk = function() {
 		
 		pm.test("Level is OK", function (){
 			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[8].id).to.equal("TN");
+			pm.expect(jsonBody.data[7].id).to.equal("TN");
 		})
 	}
 	
