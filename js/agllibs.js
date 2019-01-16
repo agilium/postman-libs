@@ -8,8 +8,10 @@ var TestLoginOk = function() {
 
 	var TestDataOk = function(enterprise, roleDimensions){
 		pm.test('Data is OK', function(){
-			pm.response.have.jsonBody('data.account.profile.societe.label', enterprise);
-			pm.response.have.jsonBody('data.account.profile.societe.rolesDimensions.id', roleDimensions);
+			jsonBody = pm.response.json();
+
+			pm.expect("jsonBody.data.account.profile.societe.label", enterprise);
+			pm.expect("jsonBody.data.account.profile.societe.rolesDimensions.id", roleDimensions);
 		})
 		
 	}
