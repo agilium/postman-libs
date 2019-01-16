@@ -187,17 +187,22 @@ var  testLogoutOk = function() {
 		
 		pm.test('Data is OK', function(){
 			var jsonBody = pm.response.json();
-				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU")
-				console.log(jsonBody.data.account.profile.societe.label);
-				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions[0].id).to.equal("absged.depositaireAvecValidation")
-				console.log(jsonBody.data.account.profile.societe.rolesDimensions.id[0]);
+				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU");
+				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions[0].id).to.equal("absged.depositaireAvecValidation");
 		});
 	}
 	
-	var TGetReferencial = function() {
-		pm.test("Referential is OK", function (){
+	var TGetReferencialLots = function() {
+		pm.test("Lot is OK", function (){
 			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[0].id).to.equal("FAC")
+			pm.expect(jsonBody.data[0].id).to.equal("FAC");
+		})
+	}
+
+	var TGetReferencialProjectPhase = function() {
+		pm.test("Phase is OK", function (){
+			jsonBody = pm.response.json();
+			pm.expect(jsonBody.data[0].id).to.equal("EXE");
 		})
 	}
 	
