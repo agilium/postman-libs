@@ -271,7 +271,7 @@ var  testLogoutOk = function() {
 		
 		pm.test("DocumentType is OK", function (){
 			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[4].id).to.equal("NOT");
+			pm.expect(jsonBody.data[30].id).to.equal("NOT");
 		})
 	}
 	
