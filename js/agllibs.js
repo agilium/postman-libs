@@ -250,7 +250,7 @@ var  testLogoutOk = function() {
 		
 		pm.test("Zone is OK", function (){
 			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[4].id).to.equal("EXE");
+			pm.expect(jsonBody.data[4].id).to.equal("TZ");
 		})
 	}
 
