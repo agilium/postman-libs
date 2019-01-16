@@ -186,7 +186,7 @@ var  testLogoutOk = function() {
 		});	
 		
 		pm.test('Data is OK', function(){
-			jsonBody = pm.response.json();
+			var jsonBody = pm.response.json();
 				pm.expect(jsonBody.data.account.profile.societe.label).to.equal("PARALU")
 				pm.expect(jsonBody.data.account.profile.societe.rolesDimensions.id).to.equal("absged.depositaireAvecValidation")
 		});
