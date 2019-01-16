@@ -202,7 +202,7 @@ var  testLogoutOk = function() {
 	var TGetReferencialProjectPhase = function() {
 		pm.test("Phase is OK", function (){
 			jsonBody = pm.response.json();
-			pm.response.should.include.deep.([['a','A']])
+			
 		})
 	}
 	
