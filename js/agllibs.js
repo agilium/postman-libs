@@ -28,8 +28,8 @@ var testResponseOk= function() {
 
 var testDataOk = function(id) {
 	pm.test('Data is OK', function(){
-	   pm.response.to.have.jsonBody("data.id", id)
-	   console.log(jsonBody.data.id)
+	   pm.response.to.have.jsonBody("data[2].id", id)
+
 	});
 }
 
@@ -202,7 +202,7 @@ var  testLogoutOk = function() {
 	var TGetReferencialProjectPhase = function() {
 		pm.test("Phase is OK", function (){
 			jsonBody = pm.response.json();
-			pm.expect(jsonBody.data[0].id).to.equal("EXE");
+			pm.response.should.include.deep.([['a','A']])
 		})
 	}
 	
