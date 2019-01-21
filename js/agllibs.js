@@ -47,6 +47,7 @@ var testReferencialIsOk = function(idReferencial) {
 
 var testUploadIsOk = function(fileName) {
 	pm.test("Document successfully uploaded", function() {
+		jsonbody = pm.response.json()
 		pm.expect(jsonBody.filename).to.eql(fileName) 
 		pm.expect(jsonBody.uploaded).to.be.true
 	})
