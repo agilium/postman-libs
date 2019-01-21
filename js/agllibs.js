@@ -78,7 +78,7 @@ var  testLogoutOk = function() {
 	}
 
 
-	var = testRoles = function (userNameVar, rolesVisit, rolesGed)  {
+	var testRoles = function (userNameVar, rolesVisit, rolesGed)  {
 		pm.test('data.Auth is OK', function () {
 			pm.response.to.have.jsonBody("data.auth.token", pm.cookies.get("AGL_LSSO")) 
 			pm.response.to.have.jsonBody("data.auth.type", "Bearer");
