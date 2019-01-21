@@ -45,7 +45,7 @@ var testReferencialIsOk = function(idReferencial) {
 let DataFiltered = jsonBody.data.filter(x=>x.id.startsWith(idReferencial)).map(x=>x.id);
 idReferencial = DataFiltered.toString()
 
-pm.test("Lots is OK", function(){
+pm.test("Referencial is OK", function(){
     pm.expect(idReferencial).to.eql(pm.variables.get("LotsFac"));
 });
 }
