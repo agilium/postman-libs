@@ -45,11 +45,13 @@ var testReferencialIsOk = function(idReferencial) {
 }
 
 var testUploadIsOk = function(fileName) {
-	pm.test("Document successfully uploaded", function() {
+	pm.test("Document have the same name when we upload it", function() {
 		pm.response.to.have.jsonBody("filename", filename) 
+	pm.test("Document upload successfully", function(){
 		pm.expect(jsonBody.uploaded).to.be.true
 	})
-}
+})
+	
 
 var testDataOk = function(id) {
 	pm.test('Data is OK', function(){
@@ -106,4 +108,4 @@ var  testLogoutOk = function() {
 			pm.expect(roles).to.deep.equal(rolesGed)
 		});
 	}
-	
+}
