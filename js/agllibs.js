@@ -39,9 +39,15 @@ var TestLoginIsOk = function(user) {
 
 
 var testReferencialIsOk = function(idReferencial) {
-	pm.test('Referencial exist', function(){
-		pm.response.to.have.jsonBody("data[0].id", idReferencial) 
-	})
+	jsonBody = pm.response.json();
+	console.log(jsonBody.data);
+
+let DataFiltered = jsonBody.data.filter(x=>x.id.startsWith(idReferencial)).map(x=>x.id);
+let idReferencial = DataFiltered.toString()
+
+pm.test("Lots is OK", function(){
+    pm.expect(idReferencial).to.eql(pm.variables.get("LotsFac"));
+});
 }
 
 var testUploadIsOk = function(fileName) {
