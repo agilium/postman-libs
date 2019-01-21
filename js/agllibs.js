@@ -92,7 +92,7 @@ var  testLogoutOk = function() {
 			pm.test("data.account.role is OK", function () {
 			pm.expect(jsonData.data.account.roles).to.be.an('array').that.includes(pm.globals.get('userRoleVisitProcess'))
 		});
-	
+		const profile = jsonData.data.account.profile;
 		
 		pm.test('RolesDimensions are OK', function () {
 			const visitRoles = profile.societe.rolesDimensions.filter(x => x.id.startsWith('absvisit.')).reduce((result, x) => {
