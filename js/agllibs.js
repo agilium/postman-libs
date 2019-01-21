@@ -1,9 +1,8 @@
 var TestLoginIsOk = function(user) {
 	let jsonBody = pm.response.json();
 	let roleDimensions;
-	
 
-	for (role of jsonBody.data.account.profile.societe.rolesDimensions) {
+	for (role of jsonBody.data.profile.societe.roleDimensions) {
 		if (role.id == "absged.depositaireAvecValidation") {
 			roleDimensions = role.id;
 			break;
@@ -41,14 +40,13 @@ var TestLoginIsOk = function(user) {
 
 var testReferencialIsOk = function(idReferencial) {
 	pm.test('Referencial exist', function(){
-		pm.response.to.have.jsonBody("data.id", idReferencial) 
+		pm.response.to.have.jsonBody("data[0].id", idReferencial) 
 	})
 }
 
 var testUploadIsOk = function(fileName) {
 	pm.test("Document successfully uploaded", function() {
-		let jsonBody = pm.response.json()
-		pm.expect(jsonBody.filename).to.eql(fileName) 
+		pm.response.to.have.jsonBody("filename", filename) 
 		pm.expect(jsonBody.uploaded).to.be.true
 	})
 }
@@ -80,3 +78,32 @@ var  testLogoutOk = function() {
 	}
 
 
+	(userNameVar, rolesVisit, rolesGed) => {
+		pm.test('data.Auth is OK', function () {
+			pm.response.to.have.jsonBody("data.auth.token", pm.cookies.get("AGL_LSSO")) 
+			pm.response.to.have.jsonBody("data.auth.type", "Bearer");
+		});
+		pm.test('data.account is OK', function () {
+			pm.response.to.have.jsonBody("data.account.login", pm.variables.get(userNameVar)) 
+			pm.response.to.have.jsonBody("data.account.roles") 
+			pm.response.to.have.jsonBody("data.account.profile")
+		});
+		const jsonData = pm.response.json() 
+			pm.test("data.account.role is OK", function () {
+			pm.expect(jsonData.data.account.roles).to.be.an('array').that.includes(pm.globals.get('userRoleVisitProcess'))
+		});
+	
+		
+		pm.test('RolesDimensions are OK', function () {
+			const visitRoles = profile.societe.rolesDimensions.filter(x => x.id.startsWith('absvisit.')).reduce((result, x) => {
+				result.push(x.id);
+				return result
+			}, []) 
+			pm.expect(visitRoles).to.deep.equal(rolesVisit)
+			
+			const gedRoles = profile.societe.rolesDimensions.filter(x => x.id.startsWith('absged.').map(x => x.id))
+			roles = gedRoles.toString()	
+			pm.expect(roles).to.deep.equal(rolesGed)
+		});
+	}
+	
