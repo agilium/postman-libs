@@ -41,7 +41,7 @@ var TestLoginIsOk = function(user) {
 
 var testReferencialIsOk = function(idReferencial) {
 	pm.test('Referencial exist', function(){
-		pm.response.to.have.jsonBody("data[0].id", idReferencial) 
+		pm.response.to.have.jsonBody("data.id", idReferencial) 
 	})
 }
 
