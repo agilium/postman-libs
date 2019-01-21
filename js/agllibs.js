@@ -1,8 +1,9 @@
 var TestLoginIsOk = function(user) {
 	let jsonBody = pm.response.json();
 	let roleDimensions;
+	
 
-	for (role of jsonBody.data.profile.societe.roleDimensions) {
+	for (role of jsonBody.data.account.profile.societe.rolesDimensions) {
 		if (role.id == "absged.depositaireAvecValidation") {
 			roleDimensions = role.id;
 			break;
