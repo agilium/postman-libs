@@ -46,7 +46,7 @@ var testReferencialIsOk = function(idReferencial) {
 
 var testUploadIsOk = function(fileName) {
 	pm.test("Document have the same name when we upload it", function() {
-		pm.response.to.have.jsonBody("filename", filename) 
+		pm.expect(jsonBody.filename).to.eql(fileName); 
 	pm.test("Document upload successfully", function(){
 		pm.expect(jsonBody.uploaded).to.be.true
 	})
