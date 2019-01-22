@@ -1,15 +1,13 @@
 var TestLoginIsOk = function(user, roleDimension) {
 	let jsonBody = pm.response.json();
-	let roleDimensions;
+	let members = [];
 
-	for (role of jsonBody.data.account.profile.societe.rolesDimensions) {
-		if (role.id == roleDimension) {
-			roleDimensions = role.id;
-			break;
-		}
-	}
+	jsonBody.data.account.profile.rolesDimensions.forEach(function(e){
+		members.push(e.id)
+		console.log(members)
+	})
 
-	console.log(roleDimensions);
+
 	pm.test("Response is Success, and it's a JSON", function(){
 		pm.response.to.be.success;
 		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
@@ -30,10 +28,9 @@ var TestLoginIsOk = function(user, roleDimension) {
 	})
 
 	pm.test("RoleDimensions is: 'absged.depositaireAvecValidation'.", function(){
-		pm.expect(roleDimensions).to.eql(roleDimension);
+		pm.expect(members).to.include.members([roleDimension]);
 	});
 }
-
 
 
 
@@ -41,11 +38,13 @@ var testReferencialIsOk = function(idReferencial) {
 	jsonBody = pm.response.json();
 	console.log(jsonBody.data);
 
-let DataFiltered = jsonBody.data.filter(x=>x.id.startsWith(idReferencial)).map(x=>x.id);
-let Referencial = DataFiltered.toString()
+	let members = [];
+	jsonBody.data.forEach(function(e){
+		members.push(e.id)
+	})
 
 pm.test("Referencial is OK", function(){
-    pm.expect(idReferencial).to.eql(Referencial);
+    pm.expect(members).to.include.members([idReferencial]);
 });
 }
 
@@ -57,7 +56,7 @@ var testUploadIsOk = function(fileName) {
 		pm.expect(jsonBody.uploaded).to.be.true
 	})
 })
-	
+}	
 
 var testDataOk = function(id) {
 	pm.test('Data is OK', function(){
@@ -85,33 +84,17 @@ var  testLogoutOk = function() {
 	
 	}
 
+var testDocumentExistInData = function(idDocumeny) {
+	let jsonBody = pm.response.json();
+	var members = [];
 
-	var testRoles = function (userNameVar, rolesVisit, rolesGed)  {
-		pm.test('data.Auth is OK', function () {
-			pm.response.to.have.jsonBody("data.auth.token", pm.cookies.get("AGL_LSSO")) 
-			pm.response.to.have.jsonBody("data.auth.type", "Bearer");
-		});
-		pm.test('data.account is OK', function () {
-			pm.response.to.have.jsonBody("data.account.login", pm.variables.get(userNameVar)) 
-			pm.response.to.have.jsonBody("data.account.roles") 
-			pm.response.to.have.jsonBody("data.account.profile")
-		});
-		const jsonData = pm.response.json() 
-			pm.test("data.account.role is OK", function () {
-			pm.expect(jsonData.data.account.roles).to.be.an('array').that.includes(pm.globals.get('userRoleVisitProcess'))
-		});
-		const profile = jsonData.data.account.profile;
-		
-		pm.test('RolesDimensions are OK', function () {
-			const visitRoles = profile.societe.rolesDimensions.filter(x => x.id.startsWith('absvisit.')).reduce((result, x) => {
-				result.push(x.id);
-				return result
-			}, []) 
-			pm.expect(visitRoles).to.deep.equal(rolesVisit)
-			
-			const gedRoles = profile.societe.rolesDimensions.filter(x => x.id.startsWith('absged.').map(x => x.id))
-			roles = gedRoles.toString()	
-			pm.expect(roles).to.deep.equal(rolesGed)
-		});
-	}
+	jsonBody.data.forEach(function(e){
+		members.push(e.id   )
+		console.log(members)
+	})
+
+	pm.test("document is in data", function(){
+		pm.expect(members).to.include.members([idDocument])
+	})
 }
+
