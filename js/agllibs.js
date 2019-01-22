@@ -1,13 +1,14 @@
-var TestLoginIsOk = function(user) {
+var TestLoginIsOk = function(user, roleDimension) {
 	let jsonBody = pm.response.json();
 	let roleDimensions;
 
 	for (role of jsonBody.data.account.profile.societe.rolesDimensions) {
-		if (role.id == "absged.depositaireAvecValidation") {
+		if (role.id == roleDimension) {
 			roleDimensions = role.id;
 			break;
 		}
 	}
+
 	console.log(roleDimensions);
 	pm.test("Response is Success, and it's a JSON", function(){
 		pm.response.to.be.success;
@@ -16,9 +17,7 @@ var TestLoginIsOk = function(user) {
 	})
 
 	pm.test("Response generated Cookie AGL_LSSO", function() {
-		
-		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true
-		
+		pm.expect(pm.cookies.has('AGL_LSSO'), 'AGL_LSSO').to.be.true;
 	});
 
 	pm.test("Payload is OK", function() {
@@ -31,7 +30,7 @@ var TestLoginIsOk = function(user) {
 	})
 
 	pm.test("RoleDimensions is: 'absged.depositaireAvecValidation'.", function(){
-		pm.expect(roleDimensions).to.eql("absged.depositaireAvecValidation");
+		pm.expect(roleDimensions).to.eql(roleDimension);
 	});
 }
 
