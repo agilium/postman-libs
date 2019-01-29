@@ -4,7 +4,7 @@ var TestLoginIsOk = function(user, roleDimension) {
 
 	_jsonBody.data.account.profile.societe.rolesDimensions.forEach(function(e){
 		_members.push(e.id)
-		console.log(members)
+		console.log(_members)
 	})
 
 	pm.test("Response is Success, and it's a JSON", function(){
