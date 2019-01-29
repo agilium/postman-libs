@@ -7,7 +7,6 @@ var TestLoginIsOk = function(user, roleDimension) {
 		console.log(members)
 	})
 
-
 	pm.test("Response is Success, and it's a JSON", function(){
 		pm.response.to.be.success;
 		pm.response.to.have.header("Content-Type", "application/json;charset=utf-8")
@@ -28,11 +27,9 @@ var TestLoginIsOk = function(user, roleDimension) {
 	})
 
 	pm.test("RoleDimensions is OK", function(){
-		pm.expect(members).to.include.members([roleDimension]);
+		pm.expect(_members).to.include.members([roleDimension]);
 	});
 }
-
-
 
 var testReferencialIsOk = function(idReferencial) {
 	_jsonBody = pm.response.json();
@@ -57,13 +54,6 @@ var testUploadIsOk = function(fileName) {
 	})
 })
 }	
-
-var testDataOk = function(id) {
-	pm.test('Data is OK', function(){
-	   pm.response.to.have.jsonBody("data[2].id", id)
-
-	});
-}
 
 var  testLogoutOk = function() {
 
@@ -97,5 +87,6 @@ var testDocumentExistInData = function(idDocument) {
 		pm.expect(members).to.include.members([idDocument])
 	})
 }
+
 
 
