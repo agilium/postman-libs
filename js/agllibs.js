@@ -1,9 +1,9 @@
 var TestLoginIsOk = function(user, roleDimension) {
-	let jsonBody = pm.response.json();
-	let members = [];
+	let _jsonBody = pm.response.json();
+	let _members = [];
 
-	jsonBody.data.account.profile.societe.rolesDimensions.forEach(function(e){
-		members.push(e.id)
+	_jsonBody.data.account.profile.societe.rolesDimensions.forEach(function(e){
+		_members.push(e.id)
 		console.log(members)
 	})
 
@@ -35,25 +35,25 @@ var TestLoginIsOk = function(user, roleDimension) {
 
 
 var testReferencialIsOk = function(idReferencial) {
-	jsonBody = pm.response.json();
-	console.log(jsonBody.data);
+	_jsonBody = pm.response.json();
+	console.log(_jsonBody.data);
 
-	let members = [];
-	jsonBody.data.forEach(function(e){
-		members.push(e.id)
+	let _members = [];
+	_jsonBody.data.forEach(function(e){
+		_members.push(e.id)
 	})
 
 pm.test("Referencial is OK", function(){
-    pm.expect(members).to.include.members([idReferencial]);
+    pm.expect(_members).to.include.members([idReferencial]);
 });
 }
 
 var testUploadIsOk = function(fileName) {
-	jsonBody = pm.response.json();
+	_jsonBody = pm.response.json();
 	pm.test("Document have the same name when we upload it", function() {
-		pm.expect(jsonBody.filename).to.eql(fileName); 
+		pm.expect(_jsonBody.filename).to.eql(fileName); 
 	pm.test("Document upload successfully", function(){
-		pm.expect(jsonBody.uploaded).to.be.true
+		pm.expect(_jsonBody.uploaded).to.be.true
 	})
 })
 }	
@@ -85,12 +85,12 @@ var  testLogoutOk = function() {
 	}
 
 var testDocumentExistInData = function(idDocument) {
-	let jsonBody = pm.response.json();
-	var members = [];
+	let _jsonBody = pm.response.json();
+	var _members = [];
 
-	jsonBody.data.forEach(function(e){
-		members.push(e.id   )
-		console.log(members)
+	_jsonBody.data.forEach(function(e){
+		_members.push(e.id   )
+		console.log(_members)
 	})
 
 	pm.test("document is in data", function(){
@@ -98,5 +98,14 @@ var testDocumentExistInData = function(idDocument) {
 	})
 }
 
+var testDocumentToValidate = function(){
+	let _jsonBody = pm.response.json();
+	var member = [];
+
+	_jsonBody.data.forEach(function(e){
+		member.push(e.status != "FIGE");
+		console.log(members);
+	})
+}
 
 
