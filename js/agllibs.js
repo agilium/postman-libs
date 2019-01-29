@@ -2,7 +2,7 @@ var TestLoginIsOk = function(user, roleDimension) {
 	let jsonBody = pm.response.json();
 	let members = [];
 
-	jsonBody.data.account.profile.rolesDimensions.forEach(function(e){
+	jsonBody.data.account.profile.societe.rolesDimensions.forEach(function(e){
 		members.push(e.id)
 		console.log(members)
 	})
@@ -84,7 +84,7 @@ var  testLogoutOk = function() {
 	
 	}
 
-var testDocumentExistInData = function(idDocumeny) {
+var testDocumentExistInData = function(idDocumen) {
 	let jsonBody = pm.response.json();
 	var members = [];
 
