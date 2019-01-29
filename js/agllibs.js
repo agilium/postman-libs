@@ -3,7 +3,7 @@ var TestLoginIsOk = function(user, roleDimension) {
 	let _members = [];
 
 	_jsonBody.data.account.profile.societe.rolesDimensions.forEach(function(e){
-		_members.push(e.id)
+		_members.push(e.id == "absged")
 		console.log(_members)
 	})
 
