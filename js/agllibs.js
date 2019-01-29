@@ -84,7 +84,7 @@ var testDocumentExistInData = function(idDocument) {
 	})
 
 	pm.test("document is in data", function(){
-		pm.expect(members).to.include.members([idDocument])
+		pm.expect(_members).to.include.members([idDocument])
 	})
 }
 
