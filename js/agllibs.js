@@ -27,7 +27,7 @@ var TestLoginIsOk = function(user, roleDimension) {
 			pm.response.to.have.jsonBody("data.account.login", user) 
 	})
 
-	pm.test("RoleDimensions is: 'absged.depositaireAvecValidation'.", function(){
+	pm.test("RoleDimensions is OK", function(){
 		pm.expect(members).to.include.members([roleDimension]);
 	});
 }
@@ -84,7 +84,7 @@ var  testLogoutOk = function() {
 	
 	}
 
-var testDocumentExistInData = function(idDocumen) {
+var testDocumentExistInData = function(idDocument) {
 	let jsonBody = pm.response.json();
 	var members = [];
 
@@ -97,4 +97,6 @@ var testDocumentExistInData = function(idDocumen) {
 		pm.expect(members).to.include.members([idDocument])
 	})
 }
+
+
 
