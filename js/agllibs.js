@@ -98,14 +98,4 @@ var testDocumentExistInData = function(idDocument) {
 	})
 }
 
-var testDocumentToValidate = function(){
-	let _jsonBody = pm.response.json();
-	var _member = [];
-
-	_jsonBody.data.forEach(function(e){
-		_member.push(e.status != "FIGE");
-		console.log(_members);
-	})
-}
-
 
