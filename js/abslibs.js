@@ -31,7 +31,7 @@ var TestLoginIsOk = function(user, roleDimension) {
 	});
 }
 
-var testReferencialIsOk = function(idReferencial) {
+var testReferencialIsOk = function(idReferential, idItem) {
 	_jsonBody = pm.response.json();
 	console.log(_jsonBody.data);
 
@@ -40,9 +40,9 @@ var testReferencialIsOk = function(idReferencial) {
 		_members.push(e.id)
 	})
 
-pm.test("Referencial is OK", function(){
-    pm.expect(_members).to.include.members([idReferencial]);
-});
+	pm.test("Item ["+idItem+"] is defined in referential ["+idReferential+"]", function(){
+	    pm.expect(_members).to.include.members([idItem]);
+	});
 }
 
 var testUploadIsOk = function(fileName) {
