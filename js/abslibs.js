@@ -51,10 +51,6 @@ var testUploadIsOk = function(fileName,subfolder) {
 		pm.expect(_jsonBody.filename).to.eql(fileName); 
 	});
 
-	pm.test("Document  ["+subfolder+"] is upload successfully", function(){
-		pm.expect(_jsonBody.subfolder).to.eql(subfolder)
-	})
-
 	pm.test("Document  ["+fileName+"] is upload successfully", function(){
 		pm.expect(_jsonBody.uploaded).to.be.true
 	});
