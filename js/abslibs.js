@@ -47,7 +47,7 @@ var testReferencialIsOk = function(idReferential, idItem) {
 
 var testUploadIsOk = function(fileName,subfolder) {
 	_jsonBody = pm.response.json();
-	pm.test("Document has the same than ["+filename+"]", function() {
+	pm.test("Document has the same than ["+fileName+"]", function() {
 		pm.expect(_jsonBody.filename).to.eql(fileName); 
 	});
 
@@ -55,7 +55,7 @@ var testUploadIsOk = function(fileName,subfolder) {
 		pm.expect(_jsonBody.subfolder).to.eql(subfolder)
 	})
 
-	pm.test("Document  ["+filename+"] is upload successfully", function(){
+	pm.test("Document  ["+fileName+"] is upload successfully", function(){
 		pm.expect(_jsonBody.uploaded).to.be.true
 	});
 }	
