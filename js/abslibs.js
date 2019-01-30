@@ -45,14 +45,19 @@ var testReferencialIsOk = function(idReferential, idItem) {
 	});
 }
 
-var testUploadIsOk = function(fileName) {
+var testUploadIsOk = function(fileName,subfolder) {
 	_jsonBody = pm.response.json();
-	pm.test("Document have the same name when we upload it", function() {
+	pm.test("Document has the same than ["+filename+"]", function() {
 		pm.expect(_jsonBody.filename).to.eql(fileName); 
-	pm.test("Document upload successfully", function(){
-		pm.expect(_jsonBody.uploaded).to.be.true
+	});
+
+	pm.test("Document  ["+subfolder+"] is upload successfully", function(){
+		pm.expect(_jsonBody.subfolder).to.eql(subfolder)
 	})
-})
+
+	pm.test("Document  ["+filename+"] is upload successfully", function(){
+		pm.expect(_jsonBody.uploaded).to.be.true
+	});
 }	
 
 var  testLogoutOk = function() {
@@ -83,9 +88,7 @@ var testDocumentExistInData = function(idDocument) {
 		console.log(_members)
 	})
 
-	pm.test("document is in data", function(){
+	pm.test("Document ["+idDocument+"] exist in the list", function(){
 		pm.expect(_members).to.include.members([idDocument])
 	})
 }
-
-
